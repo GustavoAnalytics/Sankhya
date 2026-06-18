@@ -435,6 +435,57 @@
       font-size: 14px;
     }
 
+
+    .usage-panel {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+      margin: 4px 0 22px;
+    }
+
+    .usage-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, .05);
+    }
+
+    .usage-card h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .usage-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .usage-card ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .rule-box {
+      margin: 0 0 22px;
+      padding: 16px;
+      border-radius: 18px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+
     .attention {
       margin-top: 18px;
       padding: 16px;
@@ -570,7 +621,8 @@
         position: static;
       }
 
-      .info-grid {
+      .info-grid,
+      .usage-panel {
         grid-template-columns: 1fr;
       }
 
@@ -722,6 +774,21 @@
     </div>
   </div>
 
+
+  <div class="usage-panel">
+    <div class="usage-card">
+      <h3>🧭 Quando o usuário deve usar?</h3>
+      <p id="whenUse"></p>
+    </div>
+
+    <div class="usage-card">
+      <h3>💡 Exemplos práticos</h3>
+      <ul id="examples"></ul>
+    </div>
+  </div>
+
+  <div class="rule-box" id="ruleBox"></div>
+
   <h3 class="section-title">📌 Passo a passo</h3>
   <div class="steps" id="steps"></div>
 
@@ -752,6 +819,9 @@
         path: 'Liberação de Limite',
         event: 'Liberação da solicitação pelo gestor',
         profile: 'Gestores / Aprovadores',
+        whenUse: 'Use este fluxo quando uma solicitação criada pela equipe estiver aguardando validação do gestor. É o momento de confirmar se a compra ou contratação faz sentido, se está dentro da política interna e se os dados foram preenchidos corretamente antes de seguir para Compras, Diretoria ou Pedido.',
+        examples: ['Solicitação de material para escritório.', 'Compra de equipamento para uma área.', 'Aquisição de insumo operacional.', 'Solicitação que precisa validar centro de resultado, natureza e justificativa.'],
+        rule: 'Regra prática: o gestor deve liberar somente quando a necessidade estiver clara, os dados estiverem corretos e a despesa fizer sentido para a área.',
         videoUrl: 'https://youtu.be/qcbgI85Q-DY',
         keywords: 'liberação solicitação gestor liberacao solicitacao aprovação aprovacao limite sankhya',
         steps: [
@@ -773,6 +843,9 @@
         path: 'Liberação de Limite',
         event: 'Aprovação da solicitação pela diretoria',
         profile: 'Diretoria / Aprovadores finais',
+        whenUse: 'Use este fluxo quando a solicitação exigir aprovação superior, seja por valor, impacto financeiro, tipo de despesa ou regra de alçada. A diretoria atua como validação final para garantir governança e controle antes da continuidade do processo.',
+        examples: ['Compra de alto valor.', 'Contratação estratégica.', 'Despesa fora da rotina operacional.', 'Solicitação que ultrapassa a alçada do gestor.'],
+        rule: 'Regra prática: a diretoria deve aprovar somente solicitações com justificativa completa, impacto compreendido e aderência à política de alçadas.',
         videoUrl: 'https://youtu.be/jNGggmXpdNE',
         keywords: 'aprovação solicitação diretoria aprovacao solicitacao alçada alcada final sankhya',
         steps: [
@@ -789,11 +862,14 @@
         id: 'solicitacao-s-cotacao',
         icon: '🛒',
         title: 'Solicitação S Cotação',
-        subtitle: 'Abertura de solicitação direta, sem necessidade de processo formal de cotação.',
+        subtitle: 'Use quando já existe fornecedor definido ou compra direta, sem comparação formal de propostas.',
         badge: 'Sem Cotação',
         path: 'Portal de Compras',
         event: 'Solicitação sem cotação',
         profile: 'Solicitante / Área requisitante',
+        whenUse: 'Use a Solicitação S/ Cotação quando a área já souber exatamente o que precisa comprar e não houver necessidade de comparar fornecedores. Normalmente é usada para compras recorrentes, fornecedor já homologado, contrato vigente ou compra direta previamente definida pela empresa.',
+        examples: ['Compra recorrente de materiais de consumo.', 'Fornecedor já homologado pela empresa.', 'Renovação de licença ou serviço já contratado.', 'Compra direta com fornecedor previamente definido.'],
+        rule: 'Regra prática: se já existe fornecedor definido e não será feita comparação de propostas, use Solicitação S/ Cotação.',
         videoUrl: 'https://youtu.be/OGwzmImnRCE',
         keywords: 'solicitação s cotação solicitacao sem cotacao portal compras sankhya',
         steps: [
@@ -810,11 +886,14 @@
         id: 'solicitacao-c-cotacao',
         icon: '📋',
         title: 'Solicitação C Cotação',
-        subtitle: 'Abertura de solicitação que seguirá para cotação com fornecedores.',
+        subtitle: 'Use quando a compra precisa comparar fornecedores, preços, prazos ou condições comerciais.',
         badge: 'Com Cotação',
         path: 'Portal Mov. Internos',
         event: 'Solicitação com cotação',
         profile: 'Solicitante / Compras',
+        whenUse: 'Use a Solicitação C/ Cotação quando a compra precisar passar por análise de fornecedores, comparação de preço, prazo, condição de pagamento ou negociação comercial. Este fluxo inicia a demanda para que Compras realize a cotação antes de gerar o pedido.',
+        examples: ['Compra de equipamentos.', 'Materiais de obra ou operação com variação de preço.', 'Contratação de novo fornecedor.', 'Serviços ou produtos que exigem comparação de propostas.'],
+        rule: 'Regra prática: se precisa comparar fornecedores antes de comprar, use Solicitação C/ Cotação.',
         videoUrl: 'https://youtu.be/uP-nDT1FGtE',
         keywords: 'solicitação c cotação solicitacao com cotacao portal mov internos fornecedores sankhya',
         steps: [
@@ -831,11 +910,14 @@
         id: 'solicitacao-pj',
         icon: '👤',
         title: 'Solicitação PJ',
-        subtitle: 'Fluxo para abertura e acompanhamento de solicitação relacionada a PJ no Sankhya.',
+        subtitle: 'Use apenas para prestação de serviço por Pessoa Jurídica e lançamento posterior da Nota Fiscal de Serviço.',
         badge: 'Solicitação PJ',
         path: 'Portal de Compras / Portal Mov. Internos',
         event: 'Solicitação PJ',
         profile: 'Solicitante / Gestor / Compras',
+        whenUse: 'Use a Solicitação PJ exclusivamente para contratação ou lançamento relacionado a prestação de serviço por Pessoa Jurídica, principalmente quando o objetivo for permitir o lançamento posterior da Nota Fiscal de Serviço. Não deve ser usada para compra de material ou mercadoria.',
+        examples: ['Serviço de consultoria.', 'Assessoria jurídica, contábil ou técnica.', 'Manutenção realizada por empresa prestadora.', 'Serviço de engenharia, marketing, publicidade ou tecnologia com emissão de NFS-e.'],
+        rule: 'Regra prática: se for prestação de serviço com Nota Fiscal de Serviço emitida por PJ, use Solicitação PJ. Se for compra de produto ou material, use solicitação com ou sem cotação.',
         videoUrl: 'https://youtu.be/67FpwQH8eNA',
         keywords: 'solicitação pj solicitacao pj pessoa juridica prestador fornecedor sankhya compras',
         steps: [
@@ -857,6 +939,9 @@
         path: 'Portal de Compras',
         event: 'Pedido de Compra sem cotação',
         profile: 'Compras / Suprimentos',
+        whenUse: 'Use este fluxo para criar ou acompanhar um pedido de compra que não passou por cotação formal. Ele normalmente nasce de uma solicitação sem cotação já aprovada, com fornecedor definido e condições comerciais conhecidas.',
+        examples: ['Pedido para fornecedor recorrente.', 'Pedido vinculado a contrato vigente.', 'Compra direta já aprovada.', 'Pedido de item padronizado e recorrente.'],
+        rule: 'Regra prática: se a solicitação foi aprovada sem cotação e o fornecedor já está definido, gere o Pedido de Compra S/ Cotação.',
         videoUrl: 'https://youtu.be/qvThmI1sk4k',
         keywords: 'pedido compra sem cotação pedido compra s cotacao portal compras fornecedor sankhya',
         steps: [
@@ -878,6 +963,9 @@
         path: 'Portal Mov. Internos / Cotação',
         event: 'Pedido de Compra com cotação',
         profile: 'Compras / Suprimentos',
+        whenUse: 'Use este fluxo quando a cotação já foi realizada, as propostas foram analisadas e o fornecedor vencedor foi definido. O pedido deve refletir as condições negociadas na cotação.',
+        examples: ['Pedido gerado após disputa entre fornecedores.', 'Compra com fornecedor vencedor definido.', 'Pedido com preço, prazo e condição negociados.', 'Aquisição que exigiu comparação comercial.'],
+        rule: 'Regra prática: se houve cotação e fornecedor vencedor, gere o Pedido de Compra C/ Cotação.',
         videoUrl: 'https://youtu.be/fOXBiz3YQIk',
         keywords: 'pedido compra com cotação pedido compra c cotacao fornecedor vencedor sankhya',
         steps: [
@@ -899,6 +987,9 @@
         path: 'Portal Mov. Internos / Cotação',
         event: 'Processo de cotação',
         profile: 'Compras / Suprimentos',
+        whenUse: 'Use a rotina de Cotação para registrar fornecedores participantes, comparar propostas e definir a melhor condição comercial antes da geração do pedido de compra.',
+        examples: ['Comparação de preço entre fornecedores.', 'Negociação de prazo de entrega.', 'Avaliação de condição de pagamento.', 'Registro de propostas comerciais para auditoria e rastreabilidade.'],
+        rule: 'Regra prática: a cotação deve deixar claro quem participou, quais foram as condições propostas e por que o fornecedor vencedor foi escolhido.',
         videoUrl: 'https://youtu.be/a6CZSNm92gY',
         keywords: 'cotação cotacao fornecedores proposta negociação comprador portal mov internos sankhya',
         steps: [
@@ -920,6 +1011,9 @@
         path: 'Material de Apoio',
         event: 'Documentação Corporativa',
         profile: 'Todos os Usuários',
+        whenUse: 'Use o Manual Corporativo sempre que houver dúvida sobre telas, campos, regras de preenchimento, aprovações ou boas práticas do processo no Sankhya.',
+        examples: ['Consultar o passo a passo antes de abrir uma solicitação.', 'Validar qual fluxo usar.', 'Apoiar novos usuários durante o treinamento.', 'Padronizar a execução entre áreas.'],
+        rule: 'Regra prática: na dúvida sobre qual caminho seguir, consulte o manual antes de abrir chamado ou realizar o lançamento.',
         videoUrl: '',
         pdfUrl: './MANUAL%20CORPORATIVO.pdf',
         keywords: 'manual corporativo pdf treinamento passo a passo sankhya documentação material de apoio usuário',
@@ -1007,6 +1101,9 @@
       document.getElementById('event').textContent = item.event;
       document.getElementById('profile').textContent = item.profile;
       document.getElementById('attention').textContent = item.attention;
+      document.getElementById('whenUse').textContent = item.whenUse || 'Consulte o responsável pelo processo para validar quando esta rotina deve ser utilizada.';
+      document.getElementById('ruleBox').textContent = item.rule || '';
+      document.getElementById('examples').innerHTML = (item.examples || []).map(example => `<li>${sanitize(example)}</li>`).join('');
       updateResourceActions(item);
 
       const steps = document.getElementById('steps');
